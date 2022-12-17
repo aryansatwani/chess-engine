@@ -125,7 +125,7 @@ public class Game {
                         index = 2;
                         correctionX = -2;
                         correctionY = 4;
-                    }
+                    }//hellooooo
                     else if(p.name.equalsIgnoreCase("knight")){
                         index = 3;
                         correctionX = -5;

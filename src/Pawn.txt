@@ -1,0 +1,101 @@
+public static String posibleP(int i)
+{
+    String list=" ";
+    String list=" ";oldPiece;
+    int r=i/8;c=i%8;
+    for(int j=-1;j<=1;j+=2)
+    {
+        try
+        { //capture 
+         if(Character.isLowerCase(chessBoard[r-1][c+j].charAt(0))&& i>=16) // i>=16  means your in the last row and you can promote to another chess piece
+         {
+            oldPiece=chessBoard[r-1][c+j];
+            chessBoard[r][c]=" ";
+            chessBoard[r-1][c+j]="P";
+            if(kingSafe())
+            {
+                list=list+r+c+(r-1)+(c+j)+oldPiece;
+            }
+            chessBoard[r][c]="P";
+            chessBoard[r-1][c+j]=oldPiece;
+
+
+         }
+        }catch(Exception e){}
+        try
+        { //promortion && capture  
+         if(Character.isLowerCase(chessBoard[r-1][c+j].charAt(0))&& i>=16) // i<=16  means you are in the last row and you can promote to another chess piece
+         {
+            String[] temp={"Q","R","B","K"}; //Replacement of Pawn with either Queen, Rook, Knight or Bishop.
+            for(int k=0;k<4;k++) //traversing through the 4 items in the array
+            {
+                oldPiece=chessBoard[r-1][c+j];
+            chessBoard[r][c]=" ";
+            chessBoard[r-1][c+j]=temp[k];
+            if(kingSafe())
+            //column1,column2,capture-piece,new-piece,P
+            {
+                list=list+c+(c+j)+oldPiece+temp[k]+"P";
+            }
+            chessBoard[r][c]="P";
+            chessBoard[r-1][c+j]=oldPiece;
+            }
+
+            }
+            
+        }catch(Exception e){}
+    }
+
+    try
+        { //move one up 
+         if(" ".equals(chessBoard[r-1][c])&& i>=16) // i>=16  means your in the last row and you can promote to another chess piece
+         {
+            oldPiece=chessBoard[r-1][c];
+            chessBoard[r][c]=" ";
+            chessBoard[r-1][c]="P";
+            if(kingSafe())
+            {
+                list=list+r+c+(r-1)+(c)+oldPiece;
+            }
+            chessBoard[r][c]="P";
+            chessBoard[r-1][c]=oldPiece;
+        }
+    }catch(Exception e){}
+    try
+        { //promotion && no capture
+         if(" ".equals(chessBoard[r-1][c])&& i<16) // i<16  means your in the last row and you can promote to another chess piece
+         {
+            String[] temp={"Q","R","B","K"}; //Replacement of Pawn with either Queen, Rook, Knight or Bishop.
+            for(int k=0;k<4;k++) //traversing through the 4 items in the array
+            {
+            oldPiece=chessBoard[r-1][c+j];
+            chessBoard[r][c]=" ";
+            chessBoard[r-1][c]=temp[k];
+            if(kingSafe())
+            //column1,column2,capture-piece,new-piece,P
+            {
+                list=list+c+(c)+oldPiece+temp[k]+"P";//"P" indicates that promotion will occur
+
+            }
+            chessBoard[r][c]="P";
+            chessBoard[r-1][c]=oldPiece;
+            }
+    }catch(Exception e){}
+
+    try
+        { //move two up 
+         if(" ".equals(chessBoard[r-1][c])&& " ".equals(chessBoard[r-2][c]) i>=48) 
+         {
+            oldPiece=chessBoard[r-2][c];
+            chessBoard[r][c]=" ";
+            chessBoard[r-2][c]="P";
+            if(kingSafe())
+            {
+                list=list+r+c+(r-2)+(c)+oldPiece;
+            }
+            chessBoard[r][c]="P";
+            chessBoard[r-2][c]=oldPiece;
+        }
+    }catch(Exception e){}
+    return list
+}
