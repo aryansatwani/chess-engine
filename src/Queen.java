@@ -1,3 +1,14 @@
+import java.util.LinkedList;
+public class Queen extends Piece
+{
+    public Queen(int xp,int yp,boolean isWhite,String n,LinkedList<Piece>ps)
+    {
+    super(xp,yp,isWhite,n:"queen",ps);
+    }
+    public Queen(String pos,boolean isWhite,String n,LinkedList<Piece>ps)
+    {
+        super(pos,isWhite,n:"rook",ps);
+    }
 
 
 public static String posibleQ(int i){
@@ -8,28 +19,28 @@ public static String posibleQ(int i){
     {
         for(int k=-1;k<=1;k++)
         try{
-            while(" ".equals(chessBoard[r+temp*j][c+temp*k])) //going in j,k direction
+            while(" ".equals(ps[r+temp*j][c+temp*k])) //going in j,k direction
             {
-                oldPiece=chessBoard[r+temp*j][c+temp*k];
-                chessBoard[r][c]=" ";
-                chessBoard[r+temp*j][c+temp*k]=0;
+                oldPiece=ps[r+temp*j][c+temp*k];
+                ps[r][c]=" ";
+                ps[r+temp*j][c+temp*k]=0;
                 if (kingSafe()){
                     list=list+r+c+(r+temp*j)+(c+temp*k)+oldPiece;
                 }
-                chessBoard[r][c]="Q";
-                chessBoard[r+temp*j][c+temp*k]=oldPiece; //temp keeps getting increased until there is no further to go
+                ps[r][c]="Q";
+                ps[r+temp*j][c+temp*k]=oldPiece; //temp keeps getting increased until there is no further to go
                 temp++;
             }
-            if(Character.isLower(chessBoard[r+temp*j][c+temp*k].charAt(0)))
+            if(Character.isLower(ps[r+temp*j][c+temp*k].charAt(0)))
             {
-                oldPiece=chessBoard[r+temp*j][c+temp*k];
-                chessBoard[r][c]=" ";
-                chessBoard[r+temp*j][c+temp*k]=0;
+                oldPiece=ps[r+temp*j][c+temp*k];
+                ps[r][c]=" ";
+                ps[r+temp*j][c+temp*k]=0;
                 if (kingSafe()){
                     list=list+r+c+(r+temp*j)+(c+temp*k)+oldPiece;
                 }
-                chessBoard[r][c]="Q";
-                chessBoard[r+temp*j][c+temp*k]=oldPiece; //temp keeps getting increased until there is no further to go
+                ps[r][c]="Q";
+                ps[r+temp*j][c+temp*k]=oldPiece; //temp keeps getting increased until there is no further to go
                 
 
             }
@@ -39,4 +50,5 @@ public static String posibleQ(int i){
         temp=1;
     }
     return list;
+}
 }
